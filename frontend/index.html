@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor De Tareas</title>
+    <link rel="stylesheet" href="css/css.css">
+</head>
+<body>
+    <header>
+        <h1>Gestor De Tareas</h1>
+    </header>
+    <main>
+        <section id="crear-tarea">
+            <h2>Crear tarea</h2>
+            <form id="form-crear-tarea">
+                <label for="titulo">Título de la tarea:</label>
+                <input type="text" id="titulo" name="titulo"><br><br>
+                <label for="descripcion">Descripción de la tarea:</label>
+                <textarea id="descripcion" name="descripcion"></textarea><br><br>
+                <label for="fecha-estimada">Fecha estimada de finalización:</label>
+                <input type="date" id="fecha-estimada" name="fecha-estimada"><br><br>
+                <label for="responsable">Responsable de la  tarea:</label>
+                <input type="text" id="responsable" name="responsable"><br><br>
+                <label for="prioridad">Prioridad de la tarea:</label>
+                <select id="prioridad" name="prioridad">
+                    <option value="alta">Alta</option>
+                    <option value="media">Media</option>
+                    <option value="baja">Baja</option>
+                </select><br><br>
+                <label for="observaciones">Observaciones:</label>
+                <textarea id="observaciones" name="observaciones"></textarea><br><br>
+                <button id="btn-crear-tarea">Crear tarea</button>
+            </form>
+        </section>
+        <section id="listar-tareas">
+            <h2>Listar tareas</h2>
+            <table id="tabla-tareas">
+                <thead>
+                    <tr>
+                        <th>Título de la tarea</th>
+                        <th>Descripción de la tarea</th>
+                        <th>Fecha estimada de finalización</th>
+                        <th>Responsable de la tarea</th>
+                        <th>Prioridad de la tarea</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-tareas">
+                </tbody>
+            </table>
+            <button id="btn-filtrar">Filtrar</button>
+            <button id="btn-ordenar-prioridad">Ordenar por prioridad</button>
+            <button id="btn-ordenar-fecha">Ordenar por fecha estimada de finalización</button>
+        </section>
+        <section id="filtrar-tareas">
+            <h2>Filtrar tareas</h2>
+            <form id="form-filtrar-tareas">
+                <label for="fecha-inicio">Fecha inicio:</label>
+                <input type="date" id="fecha-inicio" name="fecha-inicio"><br><br>
+                <label for="fecha-fin">Fecha finalización:</label>
+                <input type="date" id="fecha-fin" name="fecha-fin"><br><br>
+                <label for="prioridad-filtro">Prioridad de la tarea:</label>
+                <select id="prioridad-filtro" name="prioridad-filtro">
+                    <option value="alta">Alta</option>
+                    <option value="media">Media</option>
+                    <option value="baja">Baja</option>
+                </select><br><br>
+                <label for="responsable-filtro">Responsable de la tarea:</label>
+                <input type="text" id="responsable-filtro" name="responsable-filtro"><br><br>
+                <label for="titulo-filtro">Título de la tarea:</label>
+                <input type="text" id="titulo-filtro" name="titulo-filtro"><br><br>
+                <label for="descripcion-filtro">Descripción de la tarea:</label>
+                <input type="text" id="descripcion-filtro" name="descripcion-filtro"><br><br>
+                <button id="btn-filtrar-tareas">Filtrar</button>
+            </form>
+        </section>
+        <section id="ver-tareas-agrupadas">
+            <h2>Ver tareas agrupadas por estado</h2>
+            <ul id="lista-tareas-agrupadas">
+            </ul>
+        </section>
+    </main>
+    <script src="js/js.js"></script>
+</body>
+</html>
