@@ -1,87 +1,101 @@
+<!-- frontend/index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor De Tareas</title>
-    <link rel="stylesheet" href="css/css.css">
+    <title>Autogestión de Tareas</title>
+    <link rel="stylesheet" href="Css.css">
 </head>
 <body>
     <header>
-        <h1>Gestor De Tareas</h1>
+        <h1>Aplicación de Autogestión de Tareas</h1>
     </header>
     <main>
-        <section id="crear-tarea">
-            <h2>Crear tarea</h2>
-            <form id="form-crear-tarea">
-                <label for="titulo">Título de la tarea:</label>
-                <input type="text" id="titulo" name="titulo"><br><br>
-                <label for="descripcion">Descripción de la tarea:</label>
-                <textarea id="descripcion" name="descripcion"></textarea><br><br>
-                <label for="fecha-estimada">Fecha estimada de finalización:</label>
-                <input type="date" id="fecha-estimada" name="fecha-estimada"><br><br>
-                <label for="responsable">Responsable de la  tarea:</label>
-                <input type="text" id="responsable" name="responsable"><br><br>
-                <label for="prioridad">Prioridad de la tarea:</label>
-                <select id="prioridad" name="prioridad">
+        <div id="notification" class="hidden"></div>
+        <section id="task-form">
+            <h2>Crear/Modificar Tarea</h2>
+            <form id="form-tarea">
+                <input type="hidden" id="task-id">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" required>
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion"></textarea>
+                <label for="fecha-estimada-finalizacion">Fecha Estimada de Finalización:</label>
+                <input type="date" id="fecha-estimada-finalizacion" required>
+                <label for="creador">Creador:</label>
+                <input type="text" id="creador" required>
+                <label for="responsable">Responsable:</label>
+                <input type="text" id="responsable" required>
+                <label for="prioridad">Prioridad:</label>
+                <select id="prioridad" required>
                     <option value="alta">Alta</option>
                     <option value="media">Media</option>
                     <option value="baja">Baja</option>
-                </select><br><br>
+                </select>
                 <label for="observaciones">Observaciones:</label>
-                <textarea id="observaciones" name="observaciones"></textarea><br><br>
-                <button id="btn-crear-tarea">Crear tarea</button>
+                <textarea id="observaciones"></textarea>
+                <button type="submit">Guardar</button>
             </form>
         </section>
-        <section id="listar-tareas">
-            <h2>Listar tareas</h2>
-            <table id="tabla-tareas">
+        <section id="task-search">
+            <h2>Buscar Tareas</h2>
+            <form id="form-busqueda">
+                <label for="buscar-titulo">Título:</label>
+                <input type="text" id="buscar-titulo">
+                <label for="buscar-fecha-inicio">Fecha Inicio:</label>
+                <input type="date" id="buscar-fecha-inicio">
+                <label for="buscar-fecha-fin">Fecha Fin:</label>
+                <input type="date" id="buscar-fecha-fin">
+                <label for="buscar-prioridad">Prioridad:</label>
+                <select id="buscar-prioridad">
+                    <option value="">Todas</option>
+                    <option value="alta">Alta</option>
+                    <option value="media">Media</option>
+                    <option value="baja">Baja</option>
+                </select>
+                <label for="buscar-responsable">Responsable:</label>
+                <input type="text" id="buscar-responsable">
+                <label for="buscar-descripcion">Descripción:</label>
+                <input type="text" id="buscar-descripcion">
+                <button type="submit">Buscar</button>
+            </form>
+        </section>
+        <section id="task-list">
+            <h2>Lista de Tareas</h2>
+            <table>
                 <thead>
                     <tr>
-                        <th>Título de la tarea</th>
-                        <th>Descripción de la tarea</th>
-                        <th>Fecha estimada de finalización</th>
-                        <th>Responsable de la tarea</th>
-                        <th>Prioridad de la tarea</th>
+                        <th>Título</th>
+                        <th>Descripción</th>
+                        <th>Prioridad</th>
+                        <th>Fecha Estimada de Finalización</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="tbody-tareas">
+                <tbody id="tasks">
+                    <!-- Las tareas se cargarán aquí -->
                 </tbody>
             </table>
-            <button id="btn-filtrar">Filtrar</button>
-            <button id="btn-ordenar-prioridad">Ordenar por prioridad</button>
-            <button id="btn-ordenar-fecha">Ordenar por fecha estimada de finalización</button>
         </section>
-        <section id="filtrar-tareas">
-            <h2>Filtrar tareas</h2>
-            <form id="form-filtrar-tareas">
-                <label for="fecha-inicio">Fecha inicio:</label>
-                <input type="date" id="fecha-inicio" name="fecha-inicio"><br><br>
-                <label for="fecha-fin">Fecha finalización:</label>
-                <input type="date" id="fecha-fin" name="fecha-fin"><br><br>
-                <label for="prioridad-filtro">Prioridad de la tarea:</label>
-                <select id="prioridad-filtro" name="prioridad-filtro">
-                    <option value="alta">Alta</option>
-                    <option value="media">Media</option>
-                    <option value="baja">Baja</option>
-                </select><br><br>
-                <label for="responsable-filtro">Responsable de la tarea:</label>
-                <input type="text" id="responsable-filtro" name="responsable-filtro"><br><br>
-                <label for="titulo-filtro">Título de la tarea:</label>
-                <input type="text" id="titulo-filtro" name="titulo-filtro"><br><br>
-                <label for="descripcion-filtro">Descripción de la tarea:</label>
-                <input type="text" id="descripcion-filtro" name="descripcion-filtro"><br><br>
-                <button id="btn-filtrar-tareas">Filtrar</button>
+        <section id="tasks-by-state">
+            <h2>Tareas Agrupadas por Estado</h2>
+            <div id="tasks-grouped">
+                <!-- Las tareas agrupadas se cargarán aquí -->
+            </div>
+        </section>
+        <section id="reassign-task">
+            <h2>Reasignar Tarea</h2>
+            <form id="form-reasignar">
+                <label for="reasignar-id">ID de la Tarea:</label>
+                <input type="number" id="reasignar-id" required>
+                <label for="nuevo-responsable">Nuevo Responsable:</label>
+                <input type="text" id="nuevo-responsable" required>
+                <button type="submit">Reasignar</button>
             </form>
         </section>
-        <section id="ver-tareas-agrupadas">
-            <h2>Ver tareas agrupadas por estado</h2>
-            <ul id="lista-tareas-agrupadas">
-            </ul>
-        </section>
     </main>
-    <script src="js/js.js"></script>
+    <script src="java.js"></script>
 </body>
 </html>
